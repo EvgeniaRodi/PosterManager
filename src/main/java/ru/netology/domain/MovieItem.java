@@ -11,6 +11,4 @@ public class MovieItem {
     private int id;
     private int movieId;
     private String movieName;
-    private String movieGenre;
-    private int date;
 }

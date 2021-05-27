@@ -35,9 +35,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
-                <configuration>
-                    <failIfNoTests>true</failIfNoTests>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -58,12 +55,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
                 </executions>
                 <configuration>
                     <rules>
@@ -81,4 +72,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

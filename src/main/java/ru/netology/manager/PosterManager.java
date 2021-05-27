@@ -3,8 +3,18 @@ package ru.netology.manager;
 import ru.netology.domain.MovieItem;
 
 public class PosterManager {
-    private MovieItem[] items = new MovieItem[0];
-    private int numberOfMovies = 10;
+    private MovieItem[]  items = new MovieItem[0];
+    private int maxAmount = 10;
+
+    public PosterManager () {
+    }
+
+    public PosterManager (int maxAmount) {
+        if (maxAmount <= 0) {
+            return;
+        }
+        this.maxAmount = maxAmount;
+    }
 
     public void add(MovieItem item) {
         // создаём новый массив размером на единицу больше
@@ -23,22 +33,39 @@ public class PosterManager {
     }
 
     public MovieItem[] getAll() {
-        MovieItem[] result = new MovieItem[Math.min(items.length, numberOfMovies)];
-        for (int i = 0; i < result.length; i++) {
-            int index = items.length - i - 1;
-            result[i] = items[index];
+        int resultLength;
+        if(items.length > maxAmount) {
+            resultLength = maxAmount;
+        } else {
+            resultLength = items.length;
+        }
+        MovieItem[] result = new MovieItem[resultLength];
+        // перебираем массив в прямом порядке
+        // но кладём в результаты в обратном
+        for (int i = 0; i < resultLength; i++) {
+            if (items.length > maxAmount) {
+                int index = resultLength - i -1 + (items.length - maxAmount);
+                result[i] = items[index];
+            } else {
+                int index = resultLength - i - 1;
+                result[i] = items[index];
+            }
         }
         return result;
     }
-
-
-    public PosterManager() {
-    }
-
-    public PosterManager(int numberOfMovies) {
-        if (numberOfMovies < 0) {
-            return;
+    public void removeById(int id) {
+        int length = items.length - 1;
+        MovieItem[] tmp = new MovieItem[length];
+        int index = 0;
+        for (MovieItem item : items) {
+            if (item.getId() != id) {
+                tmp[index] = item;
+                index++;
+            }
         }
-        this.numberOfMovies = numberOfMovies;
+        // меняем наши элементы
+        items = tmp;
     }
+
+
 }
